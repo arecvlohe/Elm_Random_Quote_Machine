@@ -1,0 +1,16 @@
+{
+  "name": "elm-random-quote-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "chokidar '**/*.elm' -c 'elm make Main.elm --output main.js' --initial"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "elm": "^0.18.0"
+  }
+}
