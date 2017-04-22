@@ -9078,7 +9078,7 @@ var _user$project$Main$post = _elm_lang$http$Http$request(
 		method: 'GET',
 		headers: {
 			ctor: '::',
-			_0: A2(_elm_lang$http$Http$header, 'X-TheySaidSo-Api-Secret', _user$project$Private$secret),
+			_0: A2(_elm_lang$http$Http$header, 'X-TheySaidSo-Api-Secret', 'l7GYREuEF11EJiJYl5zTCweF'),
 			_1: {
 				ctor: '::',
 				_0: A2(_elm_lang$http$Http$header, 'Accept', 'application/json'),

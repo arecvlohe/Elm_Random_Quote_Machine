@@ -18,7 +18,7 @@ post =
     request
         { method = "GET"
         , headers =
-            [ header "X-TheySaidSo-Api-Secret" secret
+            [ header "X-TheySaidSo-Api-Secret" "l7GYREuEF11EJiJYl5zTCweF"
             , header "Accept" "application/json"
             ]
         , url = "http://quotes.rest/quote/random.json"
