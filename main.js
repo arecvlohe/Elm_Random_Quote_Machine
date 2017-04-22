@@ -9033,6 +9033,8 @@ var _elm_lang$http$Http$StringPart = F2(
 	});
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
 
+var _user$project$Private$secret = 'l7GYREuEF11EJiJYl5zTCweF';
+
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
@@ -9076,7 +9078,7 @@ var _user$project$Main$post = _elm_lang$http$Http$request(
 		method: 'GET',
 		headers: {
 			ctor: '::',
-			_0: A2(_elm_lang$http$Http$header, 'X-TheySaidSo-Api-Secret', 'l7GYREuEF11EJiJYl5zTCweF'),
+			_0: A2(_elm_lang$http$Http$header, 'X-TheySaidSo-Api-Secret', _user$project$Private$secret),
 			_1: {
 				ctor: '::',
 				_0: A2(_elm_lang$http$Http$header, 'Accept', 'application/json'),
@@ -9101,7 +9103,7 @@ var _user$project$Main$init = {
 	ctor: '_Tuple2',
 	_0: {
 		content: {author: '', quote: ''},
-		fetching: false
+		fetching: true
 	},
 	_1: _user$project$Main$getNewQuote
 };
