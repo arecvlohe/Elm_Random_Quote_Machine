@@ -6,6 +6,7 @@ import Html.Attributes exposing (disabled)
 import Maybe exposing (withDefault)
 import Http exposing (Request, request, header, emptyBody, expectJson)
 import Json.Decode exposing (string, map2, at)
+import Private exposing (secret)
 
 
 {- import List.Extra exposing (getAt) -}
@@ -17,7 +18,7 @@ post =
     request
         { method = "GET"
         , headers =
-            [ header "X-TheySaidSo-Api-Secret" "l7GYREuEF11EJiJYl5zTCweF"
+            [ header "X-TheySaidSo-Api-Secret" secret
             , header "Accept" "application/json"
             ]
         , url = "http://quotes.rest/quote/random.json"
@@ -60,7 +61,7 @@ model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { content = { author = "", quote = "" }, fetching = False }, getNewQuote )
+    ( { content = { author = "", quote = "" }, fetching = True }, getNewQuote )
 
 
 
