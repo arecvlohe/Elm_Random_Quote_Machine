@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "chokidar '**/*.elm' -c 'elm make src/Main.elm --output src/main.js' --initial"
+    "watch": "chokidar '**/*.elm' -c 'elm make src/Main.elm --output dist/main.js' --initial"
   },
   "keywords": [],
   "author": "",
