@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Html exposing (Html, div, button, text)
 import Html.Events exposing (onClick)
-import Html.Attributes exposing (disabled)
+import Html.Attributes exposing (disabled, class)
 import Maybe exposing (withDefault)
 import Http exposing (Request, request, header, emptyBody, expectJson)
 import Json.Decode exposing (string, map2, at)
@@ -12,8 +12,8 @@ import Json.Decode exposing (string, map2, at)
 -- REQUEST
 
 
-post : Request Quote
-post =
+get : Request Quote
+get =
     request
         { method = "GET"
         , headers =
@@ -93,7 +93,25 @@ type Msg
 
 getNewQuote : Cmd Msg
 getNewQuote =
-    Http.send NewQuote post
+    Http.send NewQuote get
+
+
+buttonText : Bool -> Html a
+buttonText bool =
+    if bool then
+        text "...Fetching Quote"
+    else
+        text "Fetch Random Quote"
+
+
+spinnerWhileLoading : Model -> List (Html a)
+spinnerWhileLoading model =
+    if model.fetching then
+        [ div [ class "o-loader" ] [ text "" ] ]
+    else
+        [ div [ class "quote__text--quote" ] [ text model.content.quote ]
+        , div [ class "quote__text--author" ] [ text ("--" ++ model.content.author ++ "--") ]
+        ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -127,10 +145,9 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ div [] [ text model.content.author ]
-        , div [] [ text model.content.quote ]
-        , button [ onClick FetchQuote, disabled model.fetching ] [ text "Fetch new quote" ]
+    div [ class "l-container container" ]
+        [ div [ class "l-quote quote" ] (spinnerWhileLoading model)
+        , button [ onClick FetchQuote, disabled model.fetching, class "o-button" ] [ buttonText model.fetching ]
         ]
 
 
