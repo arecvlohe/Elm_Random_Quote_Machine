@@ -1,2 +1,2 @@
-# Elm_Random_Quote_Machine
+# Elm Random Quote Machine
 A random quote machine in Elm
