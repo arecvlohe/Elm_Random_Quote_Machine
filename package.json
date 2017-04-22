@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "chokidar '**/*.elm' -c 'elm make src/Main.elm --output dist/main.js' --initial"
+    "build:elm": "elm make src/Main.elm --output dist/main.js",
+    "start": "parallelshell 'npm run watch:scss' 'npm run watch:elm'",
+    "watch:elm": "chokidar '**/*.elm' -c 'npm run build:elm' --initial",
+    "watch:scss": "node-sass-chokidar src/ -o dist/ --watch --recursive"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
-    "elm": "^0.18.0"
+    "elm": "^0.18.0",
+    "node-sass": "^4.5.2",
+    "node-sass-chokidar": "0.0.1",
+    "parallelshell": "^2.0.0"
   }
 }
