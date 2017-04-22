@@ -6,7 +6,6 @@ import Html.Attributes exposing (disabled)
 import Maybe exposing (withDefault)
 import Http exposing (Request, request, header, emptyBody, expectJson)
 import Json.Decode exposing (string, map2, at)
-import Private exposing (secret)
 
 
 {- import List.Extra exposing (getAt) -}
