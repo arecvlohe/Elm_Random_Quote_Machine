@@ -9036,6 +9036,61 @@ var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
+var _user$project$Main$spinnerWhileLoading = function (model) {
+	return model.fetching ? {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('o-loader'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(''),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	} : {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('quote__text--quote'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(model.content.quote),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('quote__text--author'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'--',
+							A2(_elm_lang$core$Basics_ops['++'], model.content.author, '--'))),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _user$project$Main$buttonText = function (bool) {
+	return bool ? _elm_lang$html$Html$text('...Fetching Quote') : _elm_lang$html$Html$text('Fetch Random Quote');
+};
 var _user$project$Main$model = {
 	content: {author: '', quote: ''},
 	fetching: false
@@ -9071,7 +9126,7 @@ var _user$project$Main$decoder = A3(
 			}
 		},
 		_elm_lang$core$Json_Decode$string));
-var _user$project$Main$post = _elm_lang$http$Http$request(
+var _user$project$Main$get = _elm_lang$http$Http$request(
 	{
 		method: 'GET',
 		headers: {
@@ -9096,7 +9151,7 @@ var _user$project$Main$Model = F2(
 var _user$project$Main$NewQuote = function (a) {
 	return {ctor: 'NewQuote', _0: a};
 };
-var _user$project$Main$getNewQuote = A2(_elm_lang$http$Http$send, _user$project$Main$NewQuote, _user$project$Main$post);
+var _user$project$Main$getNewQuote = A2(_elm_lang$http$Http$send, _user$project$Main$NewQuote, _user$project$Main$get);
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
 	_0: {
@@ -9143,47 +9198,44 @@ var _user$project$Main$FetchQuote = {ctor: 'FetchQuote'};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('l-container container'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$div,
-				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(model.content.author),
+					_0: _elm_lang$html$Html_Attributes$class('l-quote quote'),
 					_1: {ctor: '[]'}
-				}),
+				},
+				_user$project$Main$spinnerWhileLoading(model)),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
+					_elm_lang$html$Html$button,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(model.content.quote),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$FetchQuote),
+						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$FetchQuote),
+							_0: _elm_lang$html$Html_Attributes$disabled(model.fetching),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$disabled(model.fetching),
+								_0: _elm_lang$html$Html_Attributes$class('o-button'),
 								_1: {ctor: '[]'}
 							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Fetch new quote'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Main$buttonText(model.fetching),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
 			}
 		});
 };
